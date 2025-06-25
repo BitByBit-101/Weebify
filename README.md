@@ -55,7 +55,8 @@ npm install
 3. 🛡️ Set Up Environment Variables
 Create a .env file in the root by copying the example:
 
-cp .env.example .env
+cp .env.example
+.env
 
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
