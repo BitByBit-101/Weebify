@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weebify - Home</title>
+
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jolly+Lodger&family=Lora:ital,wght@0,400..700;1,400..700&family=Nosifer&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"
+    />
+
+    <!-- Custom Animations -->
+    <style>
+      @keyframes slideOutLeft {
+        0% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+      }
+      .animate-slideOutLeft {
+        animation: slideOutLeft 1s ease forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      .animate-slideIn {
+        animation: slideIn 0.8s ease-out forwards;
+      }
+    </style>
+
+    <!-- Scroll & Overflow Styling -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      #animeList {
+        overflow: hidden;
+      }
+
+      ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+      }
+
+      * {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+      }
+    </style>
+
+    <!-- Autofill & Input Customization -->
+    <style>
+      input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px black inset !important;
+        -webkit-text-fill-color: #df2d2d !important;
+        caret-color: #df2d2d !important;
+        border: none !important;
+      }
+
+      input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 1000px black inset !important;
+        -webkit-text-fill-color: #df2d2d !important;
+      }
+
+      input {
+        outline: none !important;
+        box-shadow: none !important;
+        background-color: black !important;
+        border: none !important;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen bg-black selection:bg-red-600 selection:text-gray-100 overflow-x-hidden overflow-y-visible"
+  >
+    <% if (user) { %>
+    <!-- loader -->
+    <script>
+      const shown = localStorage.getItem("loaderShown");
+      if (!shown) {
+        document.write(`
+    <div id="loader">
+            <h1 class="font-bold text-7xl font-[Source Sans 3] ">DISCOVER</h1>
+            <h1 class="font-bold text-7xl font-[Source Sans 3] ">WATCH</h1>
+            <h1 class="font-bold text-7xl font-[Source Sans 3] ">RATE </h1>
+    </div>
+    `);
+      }
+    </script>
+    <!-- Locomotive Scroll container -->
+    <div data-scroll-container>
+      <!-- HERO SECTION / LANDING PAGE -->
+      <div
+        data-scroll
+        data-scroll-direction="horizontal"
+        data-scroll-speed="4"
+        id="homePage"
+        class="relative bg-[url('/images/tanjirologin.png')] bg-cover bg-center h-screen w-full flex flex-col"
+      >
+        <!-- NAVIGATION BAR -->
+        <div id="navbar" class="h-30 w-full flex flex-row justify-between">
+          <h2
+            class="text-red-700 text-mega mt-0 ml-2 font-founders cursor-pointer hover:text-red-800"
+          >
+            WEEBIFY
+          </h2>
+          <!-- Profile link -->
+          <h1
+            class="text-white text-sm h-10 w-24 m-7 font-[Source Sans 3] cursor-pointer hover:text-red-500 flex items-center justify-center p-2"
+          >
+            <a id="profile" href="/profile"> Profile </a>
+          </h1>
+          <!-- Watchlist link -->
+          <h1
+            class="text-white text-sm h-10 w-24 m-7 font-[Source Sans 3] cursor-pointer hover:text-red-500 flex items-center justify-center p-2"
+          >
+            <a id="watchlist" href="/playlist">Watchlist</a>
+          </h1>
+          <!-- Search Bar -->
+          <form
+            action="/search"
+            method="GET"
+            class="relative w-full max-w-xs m-5"
+          >
+            <input
+              id="searchbar"
+              type="text"
+              name="animesearched"
+              placeholder="Search..."
+              autocomplete="on"
+              class="w-full p-2 pl-10 bg-black text-red-600 placeholder-red-500 transition-all duration-300 ease-in-out focus:w-[16rem] sm:focus:w-[20rem] focus:outline-none focus:ring-0"
+            />
+
+            <button
+              type="submit"
+              class="absolute left-2 top-2.5 hover:scale-110 transition transform duration-200 ease-in-out"
+            >
+              <img
+                src="/images/searchicon.png"
+                alt="Search"
+                class="w-5 h-5 opacity-95 hover:opacity-100"
+              />
+            </button>
+          </form>
+
+          <h1
+            class="text-white text-sm h-10 w-24 m-7 font-[Source Sans 3] cursor-pointer hover:text-red-500 flex items-center justify-center p-2"
+          >
+            <!-- Logout link -->
+            <a id="logout" href="/auth/logout">Logout</a>
+          </h1>
+        </div>
+        <!-- Greeting with username -->
+        <a
+          href="/profile"
+          data-scroll
+          data-scroll-direction="horizontal"
+          data-scroll-speed="1"
+          class="text-white text-medium mt-3 ml-20 text-normal w-48 font-[Source Sans 3] cursor-pointer hover:text-red-500"
+        >
+          Hiiii, <%= user.username %>!
+        </a>
+        <!-- ROTATING 3D CHARACTER CUBE -->
+        <div
+          data-scroll
+          data-scroll-direction="horizontal"
+          data-scroll-speed="10"
+          class="absolute top-44 h-96 w-96 p-6 m-20 flex justify-center items-center"
+        >
+          <div class="cubecontainer mt-10">
+            <div class="box-card">
+              <div class="face front p-2">
+                <img src="/images/cubeimages/gojo_sticker.png" alt="GOJO" />
+              </div>
+              <div class="face back p-2">
+                <img
+                  src="/images/cubeimages/Anya_Forger.png"
+                  alt="Anya Forger"
+                />
+              </div>
+              <div class="face right p-2">
+                <img
+                  src="/images/cubeimages/Kawaii_Itadori.png"
+                  alt="Itadori"
+                />
+              </div>
+              <div class="face left p-2">
+                <img
+                  src="/images/cubeimages/Eren_Yeager.png"
+                  alt="Eren Yeager"
+                />
+              </div>
+              <div class="face top p-4">
+                <img
+                  src="/images/cubeimages/Izuku_Midoriya.png"
+                  alt="Izuku Midoriya"
+                />
+              </div>
+              <div class="face bottom p-3">
+                <img src="/images/cubeimages/luffy.png" alt="Luffy" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1
+        class="autoshow font-founders text-ultra text-white font-normal uppercase bg-black -z-9"
+        data-scroll
+        data-scroll-speed="-2"
+      >
+        RAVE
+      </h1>
+      <!-- TOP 10 ANIME LIST -->
+      <h1
+        data-scroll
+        data-scroll-direction="vertical"
+        data-scroll-speed="2"
+        class="font-bold uppercase text-gray-300 text-bold text-5xl relative z-10 mb-10 text-center font-founders w-[vw]"
+      >
+        TOP 10 Animes Of 2025..
+      </h1>
+
+      <div
+        data-scroll
+        data-scroll-direction="vertical"
+        data-scroll-speed="2"
+        class="overflow-hidden bg-red-800"
+      >
+        <div id="animeWrapper" class="relative">
+          <div id="animeList" class="flex gap-6 px-6 py-8 relative"></div>
+        </div>
+      </div>
+      <!-- FUN FACT SECTION -->
+      <h1
+        class="autoshow sticky top-0 bg-zinc-900 w-[100vw] h-[7vh] text-[170px] text-gray-100 font-founders"
+      >
+        Fun Fact
+      </h1>
+      <div class="flex gap-10 items-center bg-zinc-900 w-[100vw] h-[100vh]">
+        <div
+          data-scroll
+          data-scroll-direction="horizontal"
+          data-scroll-speed="-2"
+          class="text-gray-100 text-center text-xl w-[30vw]"
+        >
+          <h3
+            class="autoshow mt-1 text-2xl text-gray-100 font-founders font-semibold"
+          >
+            Tanjiro’s Scars Change for a Reason
+          </h3>
+          <h3
+            class="autoshow mt-2 text-xl text-gray-100 font-founders font-normal"
+          >
+            His forehead scar evolves over time—this isn't a simple artistic
+            choice. It's revealed in the manga that the scar transforms into a
+            Demon Slayer Mark, which boosts his strength. Fans initially thought
+            it was just getting worse from battles, but it’s a mark of elite
+            power.
+          </h3>
+        </div>
+        <div class="transform -rotate-90 origin-center">
+          <video
+            data-scroll
+            data-scroll-direction="vertical"
+            data-scroll-speed="-5"
+            src="/videos/demonslayer.mp4"
+            autoplay
+            muted
+            loop
+            class="w-[400px] h-[700px] rounded-lg shadow-lg border-5 border-red-600"
+          ></video>
+        </div>
+      </div>
+      <!-- MORE FACTS SECTION -->
+      <div
+        class="bg-zinc-800 flex flex-col items-center"
+        data-scroll
+        data-scroll-direction="vertical"
+        data-scroll-speed="1"
+      >
+        <!-- HEADER SECTION -->
+        <section
+          class="w-full flex flex-col items-center space-y-8 min-h-[180vh]"
+        >
+          <h1
+            class="autoBlur text-ultra text-transparent bg-clip-text bg-gradient-to-br from-[#FF8067FF] to-[#4C0C59FF] font-founders"
+          >
+            SOME
+          </h1>
+          <div class="wave-container">
+            <h1 class="wave-text autoshow text-7xl font-founders text-pink-100">
+              <span>M</span><span>O</span><span>R</span><span>E</span>
+            </h1>
+          </div>
+          <h1
+            class="animate-charcter autoBlur text-ultra font-semibold font-founders"
+          >
+            FACTS
+          </h1>
+        </section>
+
+        <!-- CHARACTER FACT CARDS -->
+        <section class="anime-cards w-full h-screen relative bottom-10">
+          <div class="wrapper">
+            <div class="cardcontainer">
+              <input
+                type="radio"
+                name="slide"
+                id="c1"
+                class="cardinput"
+                checked
+              />
+              <label for="c1" class="card">
+                <img
+                  src="/images/cardimages/Baby_Goku.png"
+                  alt="Goku"
+                  class="card-image"
+                />
+                <div class="description">
+                  <h4 class="text-white">GOKU</h4>
+                  <p class="text-white">
+                    Goku was inspired by Sun Wukong, the Monkey King from the
+                    Chinese novel Journey to the West
+                  </p>
+                </div>
+              </label>
+              <input type="radio" name="slide" id="c2" class="cardinput" />
+              <label for="c2" class="card">
+                <img
+                  src="/images/cardimages/Naruto_Ninja_Smiling.png"
+                  alt="Goku"
+                  class="card-image"
+                />
+                <div class="description">
+                  <h4>NARUTO</h4>
+                  <p class="text-white">
+                    Naruto's name comes from a topping in ramen called
+                    “narutomaki,” which is shaped like a spiral — just like the
+                    symbol on his back
+                  </p>
+                </div>
+              </label>
+              <input type="radio" name="slide" id="c3" class="cardinput" />
+              <label for="c3" class="card">
+                <img
+                  src="/images/cardimages/Death_Note_L.png"
+                  alt="Goku"
+                  class="card-image"
+                />
+                <div class="description">
+                  <h4>L</h4>
+                  <p>
+                    He holds things like a teacup or phone with just two fingers
+                    to “use minimal effort”
+                  </p>
+                </div>
+              </label>
+              <input type="radio" name="slide" id="c4" class="cardinput" />
+              <label for="c4" class="card">
+                <img
+                  src="/images/cardimages/Shoto_Todoroki.png"
+                  alt="Goku"
+                  class="card-image"
+                />
+                <div class="description">
+                  <h4>Todoroki Shoto</h4>
+                  <p>
+                    His design represents the duality of fire and ice,
+                    symbolizing the internal conflict between his abusive father
+                    (Endeavor) and loving mother
+                  </p>
+                </div>
+              </label>
+              <input type="radio" name="slide" id="c5" class="cardinput" />
+              <label for="c5" class="card">
+                <img
+                  src="/images/cardimages/saitama.png"
+                  alt="Goku"
+                  class="card-image"
+                />
+                <div class="description">
+                  <h4>SAITAMA</h4>
+                  <p>
+                    Saitama can defeat any enemy with one punch — a parody of
+                    overpowered shonen protagonists
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- FINAL QUIZ CTA SECTION -->
+      <div
+        class="min-h-[200vh] bg-black w-[100vw] flex flex-col overflow-visible"
+      >
+        <div
+          class="text-container"
+          data-scroll
+          data-scroll-direction="vertical"
+          data-scroll-speed="2"
+        >
+          <div>Goku's toughest fight — remember it?</div>
+          <div>How many tails did Kurama have?</div>
+          <div>Name that deadly notebook!</div>
+          <div>One punch. One win. Know who?</div>
+          <div>Prove you’re a real otaku — start now!</div>
+          <button
+            onclick="window.location.href='/quiz'"
+            class="custom-mask-button bottom-10 absolute left-1/2 -translate-x-1/2 text-gray-100 font-founders font-semibold text-7xl text-red-400"
+          >
+            <span>PLAY NOW</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <% } else { %>
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="flex h-screen w-full">
+      <!-- === Sidebar Content (Left Panel) === -->
+      <div
+        id="sidebar"
+        class="fixed top-0 left-0 h-full w-96 bg-black bg-opacity-80 p-6 animate-slideIn"
+      >
+        <!-- Logo / Brand Name -->
+        <h2
+          class="text-gray-300 text-7xl font-bold font-[Source Sans 3] hover:text-gray-100 cursor-pointer"
+        >
+          Weebify
+        </h2>
+
+        <!-- Tagline -->
+        <i class="text-gray-300 text-xs mt-3 font-light">
+          - Your Ultimate Anime Companion.
+        </i>
+
+        <!-- Description -->
+        <p class="text-gray-300 text-xs mt-5 font-[Source Sans 3]">
+          With Weebify, dive into a world of endless anime adventures. Whether
+          you're into thrilling shonen battles, heartwarming slice-of-life, or
+          mind-bending mysteries, Weebify brings your anime world to life — on
+          demand, anytime, anywhere.
+        </p>
+
+        <!-- Bold Subtext -->
+        <p class="text-gray-300 text-xs mt-5 font-bold font-[Lora]">
+          Discover... Track... Rate...
+        </p>
+
+        <!-- Feature List Item 1 -->
+        <div class="flex items-center space-x-3 p-4 rounded-lg text-white">
+          <img src="/images/arrow-right.png" class="w-3 h-3" />
+          <span class="text-xs hover:font-semibold cursor-pointer">
+            Explore thousands of anime titles, from the classics to the latest
+            releases.
+          </span>
+        </div>
+
+        <!-- Feature List Item 2 -->
+        <div class="flex items-center space-x-3 p-4 rounded-lg text-white">
+          <img src="/images/arrow-right.png" class="w-3 h-3" />
+          <span class="text-xs hover:font-semibold cursor-pointer">
+            Build your watchlist. Rule your queue.
+          </span>
+        </div>
+
+        <!-- Feature List Item 3 -->
+        <div class="flex items-center space-x-3 p-4 rounded-lg text-white">
+          <img src="/images/arrow-right.png" class="w-3 h-3" />
+          <span class="text-xs hover:font-semibold cursor-pointer">
+            Rate, rave, repeat.
+          </span>
+        </div>
+
+        <!-- Feature List Item 4 -->
+        <div class="flex items-center space-x-3 p-4 rounded-lg text-white">
+          <img src="/images/arrow-right.png" class="w-3 h-3" />
+          <span class="text-xs hover:font-semibold cursor-pointer">
+            Weebify your world. Join now.
+          </span>
+        </div>
+
+        <!-- Google Login Button -->
+        <a
+          href="/auth/google"
+          class="text-white text-sm bg-red-600 px-5 py-2 rounded-lg inline-block mt-6 ml-4 hover:bg-red-700 active:bg-red-800 transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          Login with Google
+        </a>
+      </div>
+
+      <!-- === Background Image (Right Panel) === -->
+      <div
+        class="bg-[url('/images/tanjirologin.png')] bg-cover bg-center w-full h-screen"
+      ></div>
+    </div>
+
+    <% } %>
+
+    <!-- === External JS Libraries === -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="/javascripts/script.js"></script>
+
+    <!-- === Loader Animation Logic === -->
+    <script>
+      const loader = document.getElementById("loader");
+
+      if (loader) {
+        setTimeout(() => {
+          loader.style.top = "-100%";
+          localStorage.setItem("loaderShown", "true");
+        }, 4000); // Hides the loader after 4 seconds
+      }
+    </script>
+
+    <!-- === Tailwind CSS Config Override === -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              founders: ["NeueMontreal-Regular", "Roboto", "sans-serif"],
+            },
+            fontSize: {
+              mega: "130px", // Custom font size for headings
+              ultra: "410px", // Custom extra-large size
+            },
+            colors: {
+              darkgray: "#212121", // Custom color for dark backgrounds
+            },
+          },
+        },
+      };
+    </script>
+  </body>
+</html>

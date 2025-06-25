@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'FoundersGrotesk';
+  src: url('/fonts/NeueMontreal-Regular.woff') format('woff');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}

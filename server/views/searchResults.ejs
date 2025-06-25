@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results for "<%= query %>"</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/stylesheets/rating.css" />
+    <link rel="stylesheet" href="/stylesheets/searchResults.css" />
+
+    <!-- Locomotive Scroll CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css"
+    />
+  </head>
+
+  <body
+    data-scroll-container
+    class="bg-black text-white min-h-screen p-5 flex flex-col justify-between items-start"
+  >
+    <!-- Back to Home Link -->
+    <a href="/" class="inline-block mt-3 mb-4 text-gray-400 hover:text-white">
+      ← Back to Home
+    </a>
+
+    <!-- Locomotive Scroll Section -->
+    <div data-scroll-section>
+      <!-- Page Heading -->
+      <h1
+        class="font-founders uppercase text-5xl mb-5 font-semibold text-red-600"
+        data-scroll
+        data-scroll-speed="-2"
+      >
+        SHOWING Results for "<%= query %>"
+      </h1>
+
+      <!-- If No Results Found -->
+      <% if (results.length === 0) { %>
+        <div class="flex flex-col items-center justify-center flex-1 text-center">
+          <h2 class="text-xl mt-5 text-gray-300">
+            No results found for "<%= query %>"
+          </h2>
+        </div>
+      <% } else { %>
+
+      <!-- If Results Exist -->
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        <% results.forEach(anime => { %>
+          <% const preview = anime.synopsis ? anime.synopsis.slice(0, 120) + '...' : 'No description available.'; %>
+
+          <!-- Anime Card -->
+          <div class="break-inside-avoid bg-zinc-900 rounded-lg overflow-hidden shadow-lg p-3 hover:scale-[1.02] transition">
+            <!-- Anime Image -->
+            <img
+              src="<%= anime.images.jpg.large_image_url %>"
+              alt="<%= anime.title %>"
+              class="w-full h-48 object-cover rounded"
+            />
+
+            <!-- Anime Title -->
+            <h2 class="text-lg font-semibold mt-2"><%= anime.title %></h2>
+
+            <!-- Anime Preview -->
+            <p class="text-sm text-gray-300 line-clamp-3 overflow-hidden">
+              <%= preview %>
+            </p>
+
+            <!-- Read More Button -->
+            <button
+              onclick="toggleDetails('<%= anime.mal_id %>')"
+              class="mt-1 text-blue-400 text-xs hover:text-blue-500"
+            >
+              Read More
+            </button>
+
+            <!-- Full Description Hidden By Default -->
+            <div
+              id="details-<%= anime.mal_id %>"
+              class="details text-sm text-gray-400 max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+            >
+              <%= anime.synopsis || "No description available." %>
+            </div>
+
+            <!-- Add to Watchlist Form -->
+            <form action="/anime/watchlist" method="POST" class="mt-2">
+              <input type="hidden" name="animeId" value="<%= anime.mal_id %>" />
+              <input type="hidden" name="animeTitle" value="<%= anime.title %>" />
+              <input type="hidden" name="query" value="<%= query %>" />
+              <button
+                type="submit"
+                class="text-green-400 text-xs hover:text-green-500 hover:scale-100"
+              >
+                + Add to Watchlist
+              </button>
+            </form>
+
+            <!-- Rating Form -->
+            <form action="/anime/rate" method="POST" class="rating-form mt-2">
+              <input type="hidden" name="animeId" value="<%= anime.mal_id %>" />
+              <input type="hidden" name="animeTitle" value="<%= anime.title %>" />
+              <input
+                type="hidden"
+                name="redirectTo"
+                value="/search?animesearched=<%= encodedQuery %>"
+              />
+              <input type="hidden" name="rating" value="0" class="rating-value" />
+
+              <label class="text-xs text-gray-400">Rate:</label>
+
+              <!-- Star Rating UI -->
+              <nav class="rating">
+                <ul>
+                  <% for (let i = 1; i <= 5; i++) { %>
+                    <li data-value="<%= i %>">
+                      <% if (i >= 4) { %>
+                        <span></span>
+                      <% } %>
+                      <svg>
+                        <use xlink:href="#star"></use>
+                      </svg>
+                    </li>
+                  <% } %>
+                </ul>
+                <div>
+                  <span>
+                    <svg>
+                      <use xlink:href="#star"></use>
+                    </svg>
+                  </span>
+                </div>
+              </nav>
+
+              <!-- Star Icon Definition -->
+              <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+                <symbol viewBox="0 0 36 34" id="star">
+                  <path
+                    fill="currentColor"
+                    d="M19.6859343,0.861782958 L25.001,11.507 L36.002,13.175 L27.843,21.871 L29.665,32.861 L18.001,27.007 L6.337,32.861 L8.159,21.871 L0,13.175 L11.001,11.507 L16.3160657,0.861782958 C17.0364372,-0.287260986 18.9659351,-0.287260986 19.6859343,0.861782958 Z"
+                  ></path>
+                </symbol>
+              </svg>
+
+              <!-- Submit Button (Disabled by Default) -->
+              <button
+                type="submit"
+                class="ml-1 text-red-400 text-xs hover:text-red-500 opacity-50 cursor-not-allowed"
+                disabled
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        <% }); %>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- Toggle Full Description Script -->
+    <script>
+      function toggleDetails(id) {
+        const allDetails = document.querySelectorAll(".details");
+        const current = document.getElementById("details-" + id);
+
+        allDetails.forEach((detail) => {
+          if (detail !== current) {
+            detail.classList.remove("open");
+          }
+        });
+
+        current.classList.toggle("open");
+      }
+    </script>
+
+    <!-- Custom JavaScript -->
+    <script src="/javascripts/searchResults.js"></script>
+    <script src="/javascripts/rating.js"></script>
+
+    <!-- Locomotive Scroll JS -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  </body>
+</html>

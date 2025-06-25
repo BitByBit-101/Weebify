@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Watchlist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .custom-gradient {
+      background-image: linear-gradient(to bottom right,#404040, #151414, #151414, #4f4f4f);
+    }
+    .custom-gradient-hover:hover {
+      background-image: linear-gradient(to bottom right, #1a1a19, #570a17);
+      border: 0.2px solid rgb(137, 3, 3);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen px-6 py-8 font-sans">
+
+  <h1 class="text-4xl font-founders font-semibold text-red-600 mb-7 flex items-center gap-3">
+  <img src="/images/tv_icon.png" alt="TV Icon" class="w-20 h-20" />
+  My Watchlist
+</h1>
+
+  <% if (watchlist.length === 0) { %>
+    <p class="text-gray-400 text-lg">Your watchlist is currently empty...</p>
+  <% } else { %>
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2">
+      <% watchlist.forEach(item => { %>
+        <div class="relative rounded-2xl p-4 h-24 flex justify-between items-center border-none
+                    custom-gradient custom-gradient-hover transition-all duration-300">
+          <h2 class="text-base font-semibold truncate mb-2 drop-shadow-sm"><%= item.animeTitle %></h2>
+          <form action="/playlist/delete" method="POST" class="mt-auto">
+            <input type="hidden" name="animeId" value="<%= item.animeId %>">
+            <button
+              type="submit"
+              class=" inline-block relative bottom-5 text-xs text-white bg-[#AE2239FF] rounded px-3 py-1 hover:bg-red-600 transition item-center"
+            >
+              ✖ Remove
+            </button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <a href="/" class="inline-block mt-10 text-sm text-gray-400 hover:text-white transition">
+    ← Back to Home
+  </a>
+
+</body>
+</html>

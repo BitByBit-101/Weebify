@@ -1,0 +1,20 @@
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+html,
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+@font-face {
+  font-family: 'FoundersGrotesk';
+  src: url('/fonts/NeueMontreal-Regular.woff') format('woff');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+.details.open {
+  max-height: 1000px; /* Enough to show full content */
+  margin-top: 0.5rem; /* optional spacing */
+}
