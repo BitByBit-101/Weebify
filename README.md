@@ -1,7 +1,8 @@
+
 # 🎌 Weebify | BitByBit-101
 
 > A full-featured anime discovery and rating platform built with ❤️ by **Bhumika**  
-> 🌐 [Connect with me on LinkedIn](https://www.linkedin.com/in/bhumika-meena-a58843359?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app )
+> 🌐 [Connect with me on LinkedIn](https://www.linkedin.com/in/bhumika-meena-a58843359?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
 ---
 
@@ -9,11 +10,11 @@
 
 **Weebify** isn’t just another anime site — it’s your personal **anime hub**. Designed for otakus and casual viewers alike, Weebify lets you:
 
-- 🌟 **Discover new anime** with ratings and info
-- 📺 **Build a custom watchlist** (like a “Plan to Watch” shrine)
-- 📝 **Take anime quizzes** to test your fandom
-- ⭐ **Rate & review anime**
-- 🌀 Enjoy beautiful UI with **GSAP animations** and **Locomotive scroll magic**
+- 🌟 **Discover new anime** with ratings and info  
+- 📺 **Build a custom watchlist** (like a “Plan to Watch” shrine)  
+- 📝 **Take anime quizzes** to test your fandom  
+- ⭐ **Rate & review anime**  
+- 🌀 Enjoy beautiful UI with **GSAP animations** and **Locomotive scroll magic**  
 
 Think of it as **MyAnimeList meets modern web tech**, all rolled into one fast, fun, and responsive experience.
 
@@ -21,22 +22,22 @@ Think of it as **MyAnimeList meets modern web tech**, all rolled into one fast, 
 
 ## 🧰 Tech Stack
 
-| Frontend                    | Backend                  |
-|----------------------------|--------------------------|
-| 🧩 Tailwind CSS            | ⚙️ Node.js              |
-| 💫 GSAP (animations)       | 🚀 Express.js           |
-| 🎢 Locomotive Scroll       | 🛢 MongoDB + Mongoose   |
-| 🖼 EJS or Static Files      | 🔐 Passport.js (OAuth)   |
+| Frontend                   | Backend                  |
+|---------------------------|--------------------------|
+| 🧩 Tailwind CSS           | ⚙️ Node.js               |
+| 💫 GSAP (animations)      | 🚀 Express.js            |
+| 🎢 Locomotive Scroll      | 🛢 MongoDB + Mongoose    |
+| 🖼 EJS / Static Files      | 🔐 Passport.js (OAuth)   |
 
 ---
 
 ## 📦 Features
 
-- 🔍 **Search & discover anime**
-- ✅ Add anime to your **watchlist**
-- 🧠 Take anime-themed **quizzes**
-- 🗳 **Rate & review** shows
-- 🌐 **Google login** using OAuth
+- 🔍 **Search & discover anime**  
+- ✅ Add anime to your **watchlist**  
+- 🧠 Take anime-themed **quizzes**  
+- 🗳 **Rate & review** shows  
+- 🌐 **Google login** using OAuth  
 - 📱 Fully responsive + **smooth scroll & animations**
 
 ---
@@ -46,50 +47,98 @@ Think of it as **MyAnimeList meets modern web tech**, all rolled into one fast, 
 ### 1. 🧾 Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/BitByBit-101.git
-cd BitByBit-101
-2. 📦 Install Dependencies
+git clone https://github.com/BitByBit-101/Weebify.git
+cd Weebify
+```
 
+### 2. 📦 Install Dependencies
+
+```bash
 npm install
+```
 
-3. 🛡️ Set Up Environment Variables
-Create a .env file in the root by copying the example:
+### 3. 🛡️ Set Up Environment Variables
 
-cp .env.example
-.env
+Create a `.env` file in the root by copying the example:
 
+```bash
+cp .env.example .env
+```
+
+Update `.env` with the following:
+
+```
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
 
 MONGO_URI=your-mongodb-uri
 SESSION_SECRET=some-random-secret
+```
 
+---
 
-4. 🔐 Set Up Google OAuth
-Visit Google Cloud Console:
+### 4. 🔐 Set Up Google OAuth
 
-Create a new OAuth 2.0 Client ID
+- Visit [Google Cloud Console](https://console.cloud.google.com/)
+- Create a new **OAuth 2.0 Client ID**
+- Set:
 
+```
 Authorized JavaScript origin:
 http://localhost:3000
 
 Authorized redirect URI:
 http://localhost:3000/auth/google/callback
+```
 
-Paste the keys into your .env file.
+Paste the generated keys into your `.env` file.
 
-5. 🚀 Start the App
+---
 
+### 5. 🚀 Start the App
+
+```bash
 npm run dev
-Visit: http://localhost:3000
+```
 
-🧪 Bonus: Quiz & Ratings
-Take anime quizzes to test your knowledge
+Visit: [http://localhost:3000](http://localhost:3000)
 
-Rate anime based on your own score
+---
 
-Add shows to your watchlist with a click
+## 🧪 Bonus: Quiz & Ratings
 
-Smooth transitions with GSAP and buttery scroll from Locomotive.js
+- Take anime quizzes to test your knowledge  
+- Rate anime based on your own score  
+- Add shows to your watchlist with one click  
+- Smooth transitions with GSAP + buttery scroll from Locomotive.js  
 
+---
+
+## 🎥 Demo Video
+
+📺 [Watch Demo Video](https://your-demo-video-link.com)
+
+---
+
+## 📸 Demo Images
+
+| Home Page                        | Anime Details                   | Quiz Feature                    |
+|----------------------------------|----------------------------------|----------------------------------|
+| ![](./screenshots/home.png)     | ![](./screenshots/details.png)  | ![](./screenshots/quiz.png)     |
+
+> *(Add actual image files in the `screenshots/` directory for them to appear.)*
+
+---
+
+## 📇 Contact & Socials
+
+- 🧑‍💻 GitHub: [BitByBit-101](https://github.com/BitByBit-101)  
+- 💼 LinkedIn: [Bhumika Meena](https://www.linkedin.com/in/bhumika-meena-a58843359)  
+- ✉️ Email: your-email@example.com *(optional)*
+
+---
+
+## 🙌 Contributing
+
+This is a personal project, but suggestions, issues, or improvements are always welcome. Feel free to fork and make a pull request!
