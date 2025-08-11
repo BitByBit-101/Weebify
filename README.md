@@ -127,7 +127,6 @@ Visit: [http://localhost:3000](http://localhost:3000)
 |----------------------------------|----------------------------------|----------------------------------|
 | ![](./screenshots/home.png)     | ![](./screenshots/details.png)  | ![](./screenshots/quiz.png)     |
 
-> *(Add actual image files in the `screenshots/` directory for them to appear.)*
 
 ---
 
@@ -135,7 +134,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 - 🧑‍💻 GitHub: [BitByBit-101](https://github.com/BitByBit-101)  
 - 💼 LinkedIn: [Bhumika Meena](https://www.linkedin.com/in/bhumika-meena-a58843359)  
-- ✉️ Email: your-email@example.com *(optional)*
+- ✉️ Email: bhumikamina96@gmail.com
 
 ---
 
